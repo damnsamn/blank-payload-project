@@ -1,53 +1,62 @@
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import { CollectionConfig, UploadField, Where } from 'payload'
+import { CollectionConfig } from 'payload'
 
 export const TestCollection: CollectionConfig = {
   slug: 'test-collection',
   fields: [
     {
-      name: 'uploadA',
-      type: 'upload',
-      hasMany: true,
-      relationTo: 'media',
-      admin: {
-        description: 'This may select from the entire Media Collection',
-      },
-    },
-    {
       type: 'ui',
-      name: 'listUploads',
+      name: 'listFields',
       admin: {
         components: {
-          Field: '@/components/ListUploads.tsx#ListUploads',
+          Field: '@/components/ListFields.tsx#ListFields',
         },
       },
     },
-    baseImagePickerField('uploadB'),
+    {
+      name: 'fieldA',
+      type: 'text',
+    },
     {
       type: 'array',
-      name: 'uploadsArray',
-      fields: [baseImagePickerField('uploadC')],
+      name: 'arrayField',
+      fields: [
+        {
+          name: 'fieldB',
+          type: 'text',
+        },
+      ],
     },
     {
       type: 'blocks',
-      name: 'uploadsBlocks',
+      name: 'blocksField',
       blocks: [
         {
-          slug: 'uploadDBlock',
-          fields: [baseImagePickerField('uploadD')],
+          slug: 'fieldCBlock',
+          fields: [
+            {
+              name: 'fieldC',
+              type: 'text',
+            },
+          ],
         },
       ],
     },
     {
       type: 'richText',
-      name: 'uploadsRichText',
+      name: 'richTextField',
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           BlocksFeature({
             blocks: [
               {
-                slug: 'dynamicImageBlockWithinRichText',
-                fields: [baseImagePickerField('uploadE')],
+                slug: 'blockWithinRichText',
+                fields: [
+                  {
+                    name: 'fieldD',
+                    type: 'text',
+                  },
+                ],
               },
             ],
           }),
@@ -55,25 +64,4 @@ export const TestCollection: CollectionConfig = {
       }),
     },
   ],
-}
-
-function baseImagePickerField(name: string): UploadField {
-  return {
-    name,
-    type: 'upload',
-    relationTo: 'media',
-    admin: {
-      description: 'This may only select from values in Upload A',
-    },
-    filterOptions: ({ data }) => {
-      const selectedValues = data.uploadA || []
-      const selectableValues = selectedValues.concat(selectedValues.length > 0 ? [] : [null])
-
-      return {
-        id: {
-          in: selectableValues,
-        },
-      }
-    },
-  }
 }

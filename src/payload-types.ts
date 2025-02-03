@@ -101,35 +101,22 @@ export interface Media {
  */
 export interface TestCollection {
   id: number;
-  /**
-   * This may select from the entire Media Collection
-   */
-  uploadA?: (number | Media)[] | null;
-  /**
-   * This may only select from values in Upload A
-   */
-  uploadB?: (number | null) | Media;
-  uploadsArray?:
+  fieldA?: string | null;
+  arrayField?:
     | {
-        /**
-         * This may only select from values in Upload A
-         */
-        uploadC?: (number | null) | Media;
+        fieldB?: string | null;
         id?: string | null;
       }[]
     | null;
-  uploadsBlocks?:
+  blocksField?:
     | {
-        /**
-         * This may only select from values in Upload A
-         */
-        uploadD?: (number | null) | Media;
+        fieldC?: string | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'uploadDBlock';
+        blockType: 'fieldCBlock';
       }[]
     | null;
-  uploadsRichText?: {
+  richTextField?: {
     root: {
       type: string;
       children: {
@@ -246,26 +233,25 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "test-collection_select".
  */
 export interface TestCollectionSelect<T extends boolean = true> {
-  uploadA?: T;
-  uploadB?: T;
-  uploadsArray?:
+  fieldA?: T;
+  arrayField?:
     | T
     | {
-        uploadC?: T;
+        fieldB?: T;
         id?: T;
       };
-  uploadsBlocks?:
+  blocksField?:
     | T
     | {
-        uploadDBlock?:
+        fieldCBlock?:
           | T
           | {
-              uploadD?: T;
+              fieldC?: T;
               id?: T;
               blockName?: T;
             };
       };
-  uploadsRichText?: T;
+  richTextField?: T;
   updatedAt?: T;
   createdAt?: T;
 }

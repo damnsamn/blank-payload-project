@@ -2,7 +2,7 @@
 
 import { useAllFormFields } from '@payloadcms/ui'
 
-export const ListUploads = () => {
+export const ListFields = () => {
   const [allFields] = useAllFormFields()
 
   const currentFieldValues = Object.fromEntries(
@@ -18,14 +18,13 @@ export const ListUploads = () => {
         will find schema paths for each of the following:
       </p>
       <ul>
-        <li>uploadA</li>
-        <li>uploadB</li>
-        <li>uploadsArray.[index].uploadC</li>
-        <li>uploadsBlocks.[index].uploadD</li>
+        <li>fieldA</li>
+        <li>arrayField.[index].fieldB</li>
+        <li>blocksField.[index].fieldC</li>
       </ul>
       <p>
-        Note that there will be no direct schema path listed for "uploadE". Its value is instead
-        deeply nested within the `uploadsRichText` value.
+        Note that there will be no direct schema path listed for "fieldD". Its value is instead
+        deeply nested within the `richTextField` value.
       </p>
     </div>
   )
