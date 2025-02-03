@@ -13,6 +13,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'test-collection': TestCollection;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -21,6 +22,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'test-collection': TestCollectionSelect<false> | TestCollectionSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -95,6 +97,58 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "test-collection".
+ */
+export interface TestCollection {
+  id: string;
+  /**
+   * This may select from the entire Media Collection
+   */
+  uploadA?: (string | Media)[] | null;
+  /**
+   * This may only select from values in Upload A
+   */
+  uploadB?: (string | null) | Media;
+  uploadsArray?:
+    | {
+        /**
+         * This may only select from values in Upload A
+         */
+        uploadC?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  uploadsBlocks?:
+    | {
+        /**
+         * This may only select from values in Upload A
+         */
+        uploadD?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'uploadDBlock';
+      }[]
+    | null;
+  uploadsRichText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -107,6 +161,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'test-collection';
+        value: string | TestCollection;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -182,6 +240,34 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "test-collection_select".
+ */
+export interface TestCollectionSelect<T extends boolean = true> {
+  uploadA?: T;
+  uploadB?: T;
+  uploadsArray?:
+    | T
+    | {
+        uploadC?: T;
+        id?: T;
+      };
+  uploadsBlocks?:
+    | T
+    | {
+        uploadDBlock?:
+          | T
+          | {
+              uploadD?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  uploadsRichText?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
