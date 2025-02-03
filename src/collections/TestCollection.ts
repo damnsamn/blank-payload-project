@@ -13,6 +13,15 @@ export const TestCollection: CollectionConfig = {
         description: 'This may select from the entire Media Collection',
       },
     },
+    {
+      type: 'ui',
+      name: 'listUploads',
+      admin: {
+        components: {
+          Field: '@/components/ListUploads.tsx#ListUploads',
+        },
+      },
+    },
     baseImagePickerField('uploadB'),
     {
       type: 'array',
@@ -34,7 +43,6 @@ export const TestCollection: CollectionConfig = {
       name: 'uploadsRichText',
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
           BlocksFeature({
             blocks: [
               {
