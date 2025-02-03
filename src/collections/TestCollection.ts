@@ -54,6 +54,9 @@ function baseImagePickerField(name: string): UploadField {
     name,
     type: 'upload',
     relationTo: 'media',
+    admin: {
+      description: 'This may only select from values in Upload A',
+    },
     filterOptions: ({ data }) => {
       const selectedValues = data.uploadA || []
       const selectableValues = selectedValues.concat(selectedValues.length > 0 ? [] : [null])

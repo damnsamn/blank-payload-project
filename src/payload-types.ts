@@ -105,15 +105,24 @@ export interface TestCollection {
    * This may select from the entire Media Collection
    */
   uploadA?: (number | Media)[] | null;
+  /**
+   * This may only select from values in Upload A
+   */
   uploadB?: (number | null) | Media;
   uploadsArray?:
     | {
+        /**
+         * This may only select from values in Upload A
+         */
         uploadC?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
   uploadsBlocks?:
     | {
+        /**
+         * This may only select from values in Upload A
+         */
         uploadD?: (number | null) | Media;
         id?: string | null;
         blockName?: string | null;
