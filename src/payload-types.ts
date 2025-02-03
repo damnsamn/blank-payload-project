@@ -109,41 +109,6 @@ export interface TestCollection {
    * This may only select from values in Upload A
    */
   uploadB?: (string | null) | Media;
-  uploadsArray?:
-    | {
-        /**
-         * This may only select from values in Upload A
-         */
-        uploadC?: (string | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
-  uploadsBlocks?:
-    | {
-        /**
-         * This may only select from values in Upload A
-         */
-        uploadD?: (string | null) | Media;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'uploadDBlock';
-      }[]
-    | null;
-  uploadsRichText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -248,24 +213,6 @@ export interface MediaSelect<T extends boolean = true> {
 export interface TestCollectionSelect<T extends boolean = true> {
   uploadA?: T;
   uploadB?: T;
-  uploadsArray?:
-    | T
-    | {
-        uploadC?: T;
-        id?: T;
-      };
-  uploadsBlocks?:
-    | T
-    | {
-        uploadDBlock?:
-          | T
-          | {
-              uploadD?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  uploadsRichText?: T;
   updatedAt?: T;
   createdAt?: T;
 }

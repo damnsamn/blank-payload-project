@@ -1,5 +1,4 @@
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import { CollectionConfig, UploadField, Where } from 'payload'
+import { CollectionConfig, UploadField } from 'payload'
 
 export const TestCollection: CollectionConfig = {
   slug: 'test-collection',
@@ -14,38 +13,6 @@ export const TestCollection: CollectionConfig = {
       },
     },
     baseImagePickerField('uploadB'),
-    {
-      type: 'array',
-      name: 'uploadsArray',
-      fields: [baseImagePickerField('uploadC')],
-    },
-    {
-      type: 'blocks',
-      name: 'uploadsBlocks',
-      blocks: [
-        {
-          slug: 'uploadDBlock',
-          fields: [baseImagePickerField('uploadD')],
-        },
-      ],
-    },
-    {
-      type: 'richText',
-      name: 'uploadsRichText',
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          BlocksFeature({
-            blocks: [
-              {
-                slug: 'dynamicImageBlockWithinRichText',
-                fields: [baseImagePickerField('uploadE')],
-              },
-            ],
-          }),
-        ],
-      }),
-    },
   ],
 }
 
