@@ -61,6 +61,16 @@ export const Pages: CollectionConfig = {
                       name: 'contentD',
                       required: true,
                     },
+                    {
+                      type: 'text',
+                      name: 'contentE',
+                      required: true,
+                    },
+                    {
+                      type: 'text',
+                      name: 'contentF',
+                      required: true,
+                    },
                   ],
                 },
               ],
