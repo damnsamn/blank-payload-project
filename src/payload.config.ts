@@ -18,6 +18,18 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    routes: {
+      login: '/test-login',
+    },
+    meta: {
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/svg',
+          url: '/cms-icon.svg',
+        },
+      ],
+    },
   },
   collections: [Users, Media],
   editor: lexicalEditor(),
