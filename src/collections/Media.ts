@@ -12,5 +12,9 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
+  upload: {
+    crop: false,
+    focalPoint: true,
+    // resizeOptions: {},
+  },
 }
